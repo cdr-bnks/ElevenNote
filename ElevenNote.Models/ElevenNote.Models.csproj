@@ -54,8 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NoteCreate.cs" />
-    <Compile Include="NoteListItem.cs" />
+    <Compile Include="11NoteModels\NoteCreate.cs" />
+    <Compile Include="11NoteModels\NoteDetail.cs" />
+    <Compile Include="11NoteModels\NoteListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

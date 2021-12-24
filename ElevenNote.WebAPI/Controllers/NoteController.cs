@@ -13,6 +13,13 @@ namespace ElevenNote.WebAPI.Controllers
     [Authorize]
     public class NoteController : ApiController
     {
+        private NoteService CreateNoteService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var noteService = new NoteService(userId);
+            return noteService;
+        }
+
         public IHttpActionResult Get()
         {
             NoteService noteService = CreateNoteService();
@@ -28,7 +35,7 @@ namespace ElevenNote.WebAPI.Controllers
             }
 
             var service = CreateNoteService();
-             if (!service.CreateNote(note))
+            if (!service.CreateNote(note))
             {
                 return InternalServerError();
             }
@@ -37,12 +44,6 @@ namespace ElevenNote.WebAPI.Controllers
             {
                 return Ok();
             }
-        }
-        private NoteService CreateNoteService()
-        {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var noteService = new NoteService(userId);
-            return noteService;
         }
     }
 }

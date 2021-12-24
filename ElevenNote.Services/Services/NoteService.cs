@@ -1,5 +1,6 @@
 ﻿using ElevenNote.Data;
-using ElevenNote.Models;
+using ElevenNote.Models._11NoteModels;
+using ElevenNote.Models_11NoteModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,6 +54,26 @@ namespace ElevenNote.Services
                                     }
                                );
                 return query.ToArray();
+            }
+        }
+
+        public NoteDetail GetNoteById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                            ctx
+                                .Notes
+                                .Single(e => e.NoteId == id && e.OwnerId == _userId);
+                return
+                    new NoteDetail
+                    {
+                        NoteId = entity.NoteId,
+                        Title = entity.Title,
+                        Content = entity.Content,
+                        CreatedUtc = entity.CreatedUtc,
+                        ModifiedUtc = entity.ModifiedUtc,
+                    };
             }
         }
     }
