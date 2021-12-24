@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Routing;
 
 namespace ElevenNote.WebAPI.Controllers
 {
@@ -52,6 +53,14 @@ namespace ElevenNote.WebAPI.Controllers
             var note = noteService.GetNoteById(id);
             return Ok(note);
         }
+
+        /*[Route("api/RandomNote/{id}")]
+        public IHttpActionResult GetRandomNoteById(int id)
+        {
+            NoteService noteService = CreateNoteService();
+            var note = noteService.GetRandomNote(id);
+            return Ok(note);
+        }*/
 
         public IHttpActionResult Put(NoteEdit note)
         {

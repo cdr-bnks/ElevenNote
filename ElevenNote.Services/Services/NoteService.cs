@@ -57,6 +57,28 @@ namespace ElevenNote.Services
             }
         }
 
+        /*public NoteShuffle GetRandomNote(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                Guid.NewGuid().GetHashCode();
+                var entity =
+                            ctx
+                                .Notes
+                                .Where(e => e.OwnerId == _userId)
+                                .Single(e => e.NoteId == id && e.OwnerId == _userId);
+                return
+                    new NoteShuffle
+                    {
+                        NoteId = entity.NoteId,
+                        Title = entity.Title,
+                        Content = entity.Content,
+                        CreatedUtc = entity.CreatedUtc,
+                        ModifiedUtc = entity.ModifiedUtc,
+                    };
+            }
+        }*/
+
         public NoteDetail GetNoteById(int id)
         {
             using (var ctx = new ApplicationDbContext())
