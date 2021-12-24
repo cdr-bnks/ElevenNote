@@ -1,6 +1,5 @@
 ﻿using ElevenNote.Data;
 using ElevenNote.Models._11NoteModels;
-using ElevenNote.Models_11NoteModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,6 +48,7 @@ namespace ElevenNote.Services
                                     new NoteListItem
                                     {
                                         NoteId = e.NoteId,
+                                        Content =e.Content,
                                         Title = e.Title,
                                         CreatedUtc = e.CreatedUtc
                                     }
@@ -74,6 +74,23 @@ namespace ElevenNote.Services
                         CreatedUtc = entity.CreatedUtc,
                         ModifiedUtc = entity.ModifiedUtc,
                     };
+            }
+        }
+
+        public bool UpdateNote(NoteEdit model)
+        {
+            using(var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                            ctx
+                            .Notes
+                            .Single(e => e.NoteId == model.NoteId && e.OwnerId == _userId);
+
+                entity.Title = model.Title;
+                entity.Content = model.Content;
+                entity.ModifiedUtc = DateTimeOffset.UtcNow;
+
+                return ctx.SaveChanges() == 1;
             }
         }
     }

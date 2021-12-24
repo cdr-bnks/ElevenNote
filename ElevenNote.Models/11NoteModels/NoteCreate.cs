@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElevenNote.Models_11NoteModels
+namespace ElevenNote.Models._11NoteModels
 {
     public class NoteCreate
     {
         [Required]
-        [MinLength(2, ErrorMessage ="Please enter at least two characters.")]
-        [MaxLength(100, ErrorMessage ="Too many characters within this response.")]
+        [MinLength(2, ErrorMessage = "Please enter at least two characters.")]
+        [MaxLength(100, ErrorMessage = "Too many characters within this response.")]
         public string Title { get; set; }
 
         [MaxLength(8000)]
