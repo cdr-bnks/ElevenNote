@@ -19,6 +19,9 @@ namespace ElevenNote.Data
         public string Name { get; set; }
 
         [Required]
+        public bool ReadNote { get; set; }
+
+        [Required]
         public DateTimeOffset CreatedUtc { get; set; }
         public DateTimeOffset? ModifiedUtc { get; set; }
         public virtual Note Note { get; set; }
