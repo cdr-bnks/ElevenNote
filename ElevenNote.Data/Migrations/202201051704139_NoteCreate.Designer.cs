@@ -13,7 +13,7 @@ namespace ElevenNote.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202201051445532_NoteCreate"; }
+            get { return "202201051704139_NoteCreate"; }
         }
         
         string IMigrationMetadata.Source

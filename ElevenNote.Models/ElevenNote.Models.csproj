@@ -54,6 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="11CategoryModels\CategoryCreate.cs" />
+    <Compile Include="11CategoryModels\CategoryDetail.cs" />
+    <Compile Include="11CategoryModels\CategoryEdit.cs" />
+    <Compile Include="11CategoryModels\CategoryListItem.cs" />
     <Compile Include="11NoteModels\NoteCreate.cs" />
     <Compile Include="11NoteModels\NoteDetail.cs" />
     <Compile Include="11NoteModels\NoteEdit.cs" />
@@ -65,8 +69,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="11CategoryModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

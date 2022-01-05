@@ -86,9 +86,9 @@
   <ItemGroup>
     <Compile Include="Category.cs" />
     <Compile Include="IdentityModels.cs" />
-    <Compile Include="Migrations\202201051445532_NoteCreate.cs" />
-    <Compile Include="Migrations\202201051445532_NoteCreate.Designer.cs">
-      <DependentUpon>202201051445532_NoteCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202201051704139_NoteCreate.cs" />
+    <Compile Include="Migrations\202201051704139_NoteCreate.Designer.cs">
+      <DependentUpon>202201051704139_NoteCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Note.cs" />
@@ -99,8 +99,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202201051445532_NoteCreate.resx">
-      <DependentUpon>202201051445532_NoteCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202201051704139_NoteCreate.resx">
+      <DependentUpon>202201051704139_NoteCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -7,10 +7,12 @@ namespace ElevenNote.Data.Migrations
     {
         public override void Up()
         {
+            DropColumn("dbo.Category", "Description");
         }
         
         public override void Down()
         {
+            AddColumn("dbo.Category", "Description", c => c.String(nullable: false));
         }
     }
 }
