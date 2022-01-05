@@ -86,13 +86,9 @@
   <ItemGroup>
     <Compile Include="Category.cs" />
     <Compile Include="IdentityModels.cs" />
-    <Compile Include="Migrations\202111281735385_InitialCreate.cs" />
-    <Compile Include="Migrations\202111281735385_InitialCreate.Designer.cs">
-      <DependentUpon>202111281735385_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202112242155404_NoteCreate.cs" />
-    <Compile Include="Migrations\202112242155404_NoteCreate.Designer.cs">
-      <DependentUpon>202112242155404_NoteCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202201051445532_NoteCreate.cs" />
+    <Compile Include="Migrations\202201051445532_NoteCreate.Designer.cs">
+      <DependentUpon>202201051445532_NoteCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Note.cs" />
@@ -103,11 +99,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202111281735385_InitialCreate.resx">
-      <DependentUpon>202111281735385_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202112242155404_NoteCreate.resx">
-      <DependentUpon>202112242155404_NoteCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202201051445532_NoteCreate.resx">
+      <DependentUpon>202201051445532_NoteCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

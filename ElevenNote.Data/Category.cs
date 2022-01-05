@@ -18,12 +18,8 @@ namespace ElevenNote.Data
 
         [Required]
         public string Subject { get; set; }
+        public bool  FavoriteCategory{ get; set; }
 
-        [Required]
-        public bool StarMark { get; set; }
-
-        [ForeignKey(nameof(Note))]
-        public int NoteId { get; set; }
-        public virtual Note Note { get; set; }
+        public virtual ICollection<Note> Notes { get; set; }
     }
 }
