@@ -13,5 +13,8 @@ namespace ElevenNote.Models._11CategoryModels
 
         [Display(Name ="Enter Category:")]
         public string Subject { get; set; }
+
+        [Display(Name = "Starred")]
+        public bool? FavoriteCategory { get; set; }
     }
 }

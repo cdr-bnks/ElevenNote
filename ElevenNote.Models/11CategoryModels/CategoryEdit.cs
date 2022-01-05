@@ -10,5 +10,6 @@ namespace ElevenNote.Models._11CategoryModels
     {
         public int CategoryId { get; set; }
         public string Subject { get; set; }
+        public bool FavorityCategory { get; set; }
     }
 }
