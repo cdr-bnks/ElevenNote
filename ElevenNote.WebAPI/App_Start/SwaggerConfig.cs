@@ -13,6 +13,80 @@ using System.Web.Http.Filters;
 
 namespace ElevenNote.WebAPI
 {
+    /// <summary>
+    /// Document filter for adding Authorization header in Swashbuckle / Swagger.
+    /// </summary>
+    public class AddAuthorizationHeaderParameterOperationFilter : IOperationFilter
+    {
+        public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
+        {
+            var filterPipeline = apiDescription.ActionDescriptor.GetFilterPipeline();
+            var isAuthorized = filterPipeline
+                .Select(filterInfo => filterInfo.Instance)
+                .Any(filter => filter is IAuthorizationFilter);
+
+            var allowAnonymous = apiDescription.ActionDescriptor.GetCustomAttributes<AllowAnonymousAttribute>().Any();
+
+            if (!isAuthorized || allowAnonymous) return;
+
+            if (operation.parameters == null) operation.parameters = new List<Parameter>();
+
+            operation.parameters.Add(new Parameter
+            {
+                name = "Authorization",
+                @in = "header",
+                description = "from /token endpoint",
+                required = true,
+                type = "string"
+            });
+        }
+    }
+
+    /// <summary>
+    /// Document filter for adding OAuth Token endpoint documentation in Swashbuckle / Swagger.
+    /// Swagger normally won't find it - the /token endpoint - due to it being programmatically generated.
+    /// </summary>
+    class AuthTokenEndpointOperation : IDocumentFilter
+    {
+        public void Apply(SwaggerDocument swaggerDoc, SchemaRegistry schemaRegistry, IApiExplorer apiExplorer)
+        {
+            swaggerDoc.paths.Add("/token", new PathItem
+            {
+                post = new Operation
+                {
+                    tags = new List<string> { "Auth" },
+                    consumes = new List<string>
+                    {
+                        "application/x-www-form-urlencoded"
+                    },
+                    parameters = new List<Parameter> {
+                        new Parameter
+                        {
+                            type = "string",
+                            name = "grant_type",
+                            required = true,
+                            @in = "formData"
+                        },
+                        new Parameter
+                        {
+                            type = "string",
+                            name = "username",
+                            required = false,
+                            @in = "formData"
+                        },
+                        new Parameter
+                        {
+                            type = "string",
+                            name = "password",
+                            required = false,
+                            @in = "formData"
+                        }
+                    }
+                }
+            });
+        }
+    }
+
     public class SwaggerConfig
     {
         public static void Register()
@@ -39,6 +113,12 @@ namespace ElevenNote.WebAPI
                         // additional fields by chaining methods off SingleApiVersion.
                         //
                         c.SingleApiVersion("v1", "ElevenNote.WebAPI");
+
+                        // Enable adding the Authorization header to [Authorize]d endpoints.
+                        c.OperationFilter(() => new AddAuthorizationHeaderParameterOperationFilter());
+
+                        // Show the programmatically generated /token endpoint in the UI.
+                        c.DocumentFilter<AuthTokenEndpointOperation>();
 
                         // If you want the output Swagger docs to be indented properly, enable the "PrettyPrint" option.
                         //
@@ -67,7 +147,7 @@ namespace ElevenNote.WebAPI
                         //c.BasicAuth("basic")
                         //    .Description("Basic HTTP Authentication");
                         //
-						// NOTE: You must also configure 'EnableApiKeySupport' below in the SwaggerUI section
+                        // NOTE: You must also configure 'EnableApiKeySupport' below in the SwaggerUI section
                         //c.ApiKey("apiKey")
                         //    .Description("API Key Authentication")
                         //    .Name("apiKey")
@@ -176,7 +256,7 @@ namespace ElevenNote.WebAPI
                         // with the same path (sans query string) and HTTP method. You can workaround this by providing a
                         // custom strategy to pick a winner or merge the descriptions for the purposes of the Swagger docs
                         //
-                        //c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+                        c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
 
                         // Wrap the default SwaggerGenerator with additional behavior (e.g. caching) or provide an
                         // alternative implementation for ISwaggerProvider with the CustomProvider option.
