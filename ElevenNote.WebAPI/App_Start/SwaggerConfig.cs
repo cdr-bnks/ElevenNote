@@ -2,6 +2,12 @@ using System.Web.Http;
 using WebActivatorEx;
 using ElevenNote.WebAPI;
 using Swashbuckle.Application;
+using System.Linq;
+using Swashbuckle.Swagger;
+using System.Collections.Generic;
+using System.Web.Http.Description;
+using System.Web.Http.Filters;
+
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
